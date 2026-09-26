@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bernar Berdikul</title>
+<meta name="description" content="Bernar Berdikul, backend and data engineer in Almaty. Python, Airflow, dbt, Greenplum. Reconciling airline ticket data at Freedom Travel.">
+<meta property="og:title" content="Bernar Berdikul">
+<meta property="og:description" content="Backend and data engineer in Almaty. Python, Airflow, dbt, Greenplum.">
+<meta property="og:image" content="https://bernarberdikul.github.io/avatar.jpg">
+<meta property="og:url" content="https://bernarberdikul.github.io/">
+<meta property="og:type" content="profile">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315212C'/%3E%3Ctext x='32' y='44' font-family='Arial Narrow,Arial,sans-serif' font-weight='700' font-size='34' text-anchor='middle' fill='%23F0A92E'%3EBB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+  :root {
+    --ground: #EEF1F4;
+    --surface: #FFFFFF;
+    --ink: #15212C;
+    --muted: #56636F;
+    --line: #D3DAE1;
+    --amber: #F0A92E;
+    --on-amber: #15212C;
+    --link: #0F5A9E;
+    --shadow: 0 1px 2px rgba(21, 33, 44, .06), 0 12px 32px rgba(21, 33, 44, .08);
+    --display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+    --body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #0D141B;
+      --surface: #15202A;
+      --ink: #E4EAF0;
+      --muted: #93A3B2;
+      --line: #283541;
+      --amber: #F2B347;
+      --on-amber: #15212C;
+      --link: #86BEF2;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #0D141B;
+    --surface: #15202A;
+    --ink: #E4EAF0;
+    --muted: #93A3B2;
+    --line: #283541;
+    --amber: #F2B347;
+    --on-amber: #15212C;
+    --link: #86BEF2;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--link); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { text-decoration-color: currentColor; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 64px; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Boarding pass */
+  .pass {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    background: var(--surface);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .band {
+    grid-column: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 4px 16px;
+    flex-wrap: wrap;
+    padding: 10px 28px;
+    background: var(--amber);
+    color: var(--on-amber);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .pass-main { padding: 28px; display: grid; gap: 22px; align-content: start; }
+  .who { display: flex; gap: 20px; align-items: center; }
+  .who img { width: 92px; height: 92px; border-radius: 14px; object-fit: cover; flex: none; }
+  .who .label { display: block; margin-bottom: 2px; }
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(42px, 7.4vw, 68px);
+    line-height: .95;
+    letter-spacing: .005em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lede { margin: 0; max-width: 60ch; font-size: 18px; }
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 20px;
+    margin: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .fields div { display: grid; gap: 2px; }
+  .fields dt { margin: 0; }
+  .fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.15; }
+
+  .pass-stub {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: relative;
+    padding: 28px 24px;
+    border-left: 2px dashed var(--line);
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+  .pass-stub::before, .pass-stub::after {
+    content: '';
+    position: absolute;
+    left: -13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ground);
+  }
+  .pass-stub::before { top: -12px; }
+  .pass-stub::after { bottom: -12px; }
+  .contact { display: grid; gap: 2px; }
+  .contact a, .contact span.value { font-family: var(--mono); font-size: 14px; overflow-wrap: anywhere; }
+  .email-row { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .copy {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+  }
+  .copy:hover { border-color: var(--amber); }
+
+  /* Sections */
+  section { display: grid; gap: 22px; }
+  h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.15; letter-spacing: .01em; }
+  p { margin: 0; }
+  .prose { display: grid; gap: 14px; max-width: 66ch; }
+
+  .now { display: grid; gap: 14px; padding-left: 20px; border-left: 4px solid var(--amber); }
+  .now .meta { color: var(--muted); font-style: italic; }
+  .now ul { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; max-width: 68ch; }
+  .now li::marker { color: var(--amber); }
+  .stack { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
+  .timeline li { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 6px 24px; }
+  .dates { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 5px; white-space: nowrap; }
+  .role { color: var(--muted); font-style: italic; }
+  .timeline p { max-width: 64ch; }
+
+  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+  .project { display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 1px solid var(--line); }
+  .tags { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .skills { margin: 0; display: grid; gap: 12px; }
+  .skills div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 4px 24px; }
+  .skills dt { padding-top: 4px; }
+  .skills dd { margin: 0; }
+
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+  .two ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .two li span { display: block; color: var(--muted); font-size: 15px; }
+
+  footer { font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 720px) {
+    .pass { grid-template-columns: minmax(0, 1fr); }
+    .pass-stub { grid-column: 1; grid-row: auto; border-left: 0; border-top: 2px dashed var(--line); }
+    .pass-stub::before, .pass-stub::after { top: -13px; bottom: auto; }
+    .pass-stub::before { left: -12px; }
+    .pass-stub::after { left: auto; right: -12px; }
+    .timeline li, .skills div { grid-template-columns: minmax(0, 1fr); }
+    .dates { padding-top: 0; }
+    .projects, .two { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 440px) {
+    .pass-main, .pass-stub { padding: 22px 18px; }
+    .band { padding: 10px 18px; }
+    .who { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .who img { width: 76px; height: 76px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="pass" aria-label="Profile">
+    <div class="band" aria-hidden="true"><span>Backend and data engineering</span><span>ALA · Almaty</span></div>
+    <div class="pass-main">
+      <div class="who">
+        <img src="avatar.jpg" alt="Bernar Berdikul" width="92" height="92">
+        <div>
+          <span class="label">Passenger · Berdikul/Bernar Mr</span>
+          <h1>Bernar Berdikul</h1>
+        </div>
+      </div>
+      <p class="lede">Software engineer from Almaty. Six years of Python backends; today I keep the money data of a travel company honest, matching every ticket we sell against what the airline says it sold.</p>
+      <dl class="fields">
+        <div><dt class="label">Role</dt><dd>Data Engineer</dd></div>
+        <div><dt class="label">Now at</dt><dd>Freedom Travel</dd></div>
+        <div><dt class="label">Main stack</dt><dd>Python · SQL</dd></div>
+        <div><dt class="label">Shipping since</dt><dd>2020</dd></div>
+      </dl>
+    </div>
+    <div class="pass-stub">
+      <span class="label">Contact</span>
+      <div class="contact">
+        <span class="label">Email</span>
+        <div class="email-row">
+          <a id="email" href="mailto:bernar.berdikul@gmail.com">bernar.berdikul@gmail.com</a>
+          <button class="copy" type="button" id="copy-email" data-copy="bernar.berdikul@gmail.com" aria-controls="email">Copy</button>
+        </div>
+      </div>
+      <div class="contact">
+        <span class="label">Telegram</span>
+        <a href="https://t.me/bernar_berdicool" rel="noopener">@bernar_berdicool</a>
+      </div>
+      <div class="contact">
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/bernar-berdikul-108919406/" rel="noopener">in/bernar-berdikul</a>
+      </div>
+      <div class="contact">
+        <span class="label">GitHub</span>
+        <a href="https://github.com/BernarBerdikul" rel="noopener">BernarBerdikul</a>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="about">
+    <h2 id="about">About</h2>
+    <div class="prose">
+      <p>I started on product backends: a QR menu and payments platform for restaurants, a learning platform with team quizzes, a loading optimizer for a steel plant, an HR product with AI resume matching. Django, FastAPI, Kafka, Celery, Docker, and whatever else the job needed.</p>
+      <p>Since 2026 I work on data at Freedom Travel. Airline and GDS statements arrive every night; my pipeline parses them, matches each document to the sale on our platform and builds the reports accounting closes the month with. When a number is off, I find out why in the code, the logs and the data before anyone has to ask.</p>
+      <p>AI agents are part of my toolchain: Claude Code connected to our logs, GitLab and the warehouse, with repository playbooks and a searchable index of the codebase. It makes investigations faster. I still review and own every change.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="now">
+    <h2 id="now">Now: Freedom Travel</h2>
+    <div class="now">
+      <div>
+        <h3>Data Engineer</h3>
+        <p class="meta">Apr 2026 → now · Almaty · Aviata and Chocotravel, flights, rail, hotels and tours</p>
+      </div>
+      <ul>
+        <li>Ingestion of daily statements from 15+ airline and GDS sources (Amadeus, Sabre, Turkish Airlines NDC, flydubai, Air Arabia, Kiwi, Sirena and others) over SFTP, mailboxes, APIs and web portals.</li>
+        <li>dbt models on Greenplum that reconcile sales with provider documents: exchanges, refunds, EMDs, name corrections, currency conversion. Found and fixed double counting and lost rows that moved report totals.</li>
+        <li>Night pipeline reliability: traced timeouts to lock chains, resource queue jams and memory limits in Greenplum. Batched provider writes (one sink went from about 36 minutes to under 3), untangled schedules, added a guard for runaway queries.</li>
+        <li>Guard rails: reconciliation invariants, freshness alerts for source tables, empty report alerts and a daily provider error rate digest.</li>
+        <li>Platform housekeeping: report delivery moved from Google Drive to OneDrive, mail ingest to Microsoft 365, about 100 dead DAG files removed, DAGs ready for Airflow 2.11, an isolated dev stage.</li>
+      </ul>
+      <p class="stack">Python · SQL · Airflow · dbt · Greenplum · PostgreSQL · RabbitMQ · Kubernetes · GitLab&nbsp;CI · ELK · Claude&nbsp;Code</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="experience">
+    <h2 id="experience">Before that</h2>
+    <ol class="timeline">
+      <li>
+        <span class="dates">Sep 2024 → Apr 2026</span>
+        <div>
+          <h3>MyStartups</h3>
+          <p class="role">Backend Developer</p>
+          <p>SaaS HR platform: candidate base with AI resume and vacancy matching (5K+ resumes a month), employee records, leave tracking, clock-in schedules. An LMS with proctored assessments and a document approval system.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">May → Oct 2024</span>
+        <div>
+          <h3>Akhter Studios</h3>
+          <p class="role">Backend Developer, contract</p>
+          <p>CRM for a microfinance organization: a form builder with 15+ field types, loan application workflows, payment gateways and automated reporting.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">Dec 2023 → Aug 2024</span>
+        <div>
+          <h3>BTS, Eurasian Resources Group</h3>
+          <p class="role">Team Lead</p>
+          <p>Led five developers building a corporate portal: video streaming for 500+ concurrent viewers, document approvals, an internal social network.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">Mar 2022 → Dec 2023</span>
+        <div>
+          <h3>YLab Development</h3>
+          <p class="role">Backend Developer</p>
+          <p>Wagon loading optimizer for one of Russia's largest steel plants: calculation time cut from 30 to 10 minutes. Flask and FastAPI services over Redis and Celery, SSE updates, a Kafka consumer for PostgreSQL sync; test coverage raised from 10% to 40%.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">Jan → Mar 2022</span>
+        <div>
+          <h3>EPAM Systems</h3>
+          <p class="role">Software Engineer</p>
+          <p>Python training program for beginner developers.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">Oct 2020 → Dec 2021</span>
+        <div>
+          <h3>Appetite Inc.</h3>
+          <p class="role">Python Software Engineer</p>
+          <p>Cheflist, a QR menu and ordering platform built from scratch: REST API, WebSockets, CloudPayments, Firebase push, FFmpeg media processing. 60+ venues in four months, 12K+ users.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dates">Jan → Oct 2020</span>
+        <div>
+          <h3>Codebusters</h3>
+          <p class="role">Backend Developer</p>
+          <p>IQanat and Gamisoft learning platforms: 5v5 quiz battles, gamification, real-time notifications. FastAPI microservices for rewards, subscriptions and courses; apps shipped to the App Store and Google Play.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="projects">
+    <h2 id="projects">Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>MixIt</h3>
+        <span class="tags">Flutter · BLoC · Clean Architecture · Hive</span>
+        <p>Cocktail recipe app on TheCocktailDB: search with debounce, category filters, favorites and an offline cache.</p>
+        <a href="https://github.com/BernarBerdikul/cocktail-mobile-app" rel="noopener">Code on GitHub</a>
+      </article>
+      <article class="project">
+        <h3>Random Coffee</h3>
+        <span class="tags">React · TypeScript · Python</span>
+        <p>Picks colleagues, validates the list and shuffles them into random coffee meetings, keeping a history of past rounds.</p>
+        <a href="https://github.com/BernarBerdikul/random-coffee-front" rel="noopener">Code on GitHub</a>
+      </article>
+      <article class="project">
+        <h3>Billing service</h3>
+        <span class="tags">Django · Celery · Kafka · YooKassa · team project</span>
+        <p>Subscription payments and refunds with exactly-once processing and a Django admin for payment control. Graduation project of the Yandex Practicum Middle Python track.</p>
+        <a href="https://github.com/BernarBerdikul/graduate_work" rel="noopener">Code on GitHub</a>
+      </article>
+      <article class="project">
+        <h3>Online cinema services</h3>
+        <span class="tags">FastAPI · Elasticsearch · Kafka · ClickHouse</span>
+        <p>A set of services built sprint by sprint: ETL from PostgreSQL to Elasticsearch, an async catalog API, auth, user generated content through Kafka into ClickHouse.</p>
+        <a href="https://github.com/BernarBerdikul?tab=repositories" rel="noopener">Repositories on GitHub</a>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">Skills</h2>
+    <dl class="skills">
+      <div><dt class="label">Data</dt><dd>Airflow, dbt, Greenplum, PostgreSQL, ClickHouse, Elasticsearch, Redis, Kafka, RabbitMQ</dd></div>
+      <div><dt class="label">Backend</dt><dd>Python, Django, DRF, FastAPI, Flask, aiohttp, Sanic, Celery, WebSockets, SSE</dd></div>
+      <div><dt class="label">Infrastructure</dt><dd>Docker, Kubernetes, GitLab CI, GitHub Actions, Ansible, Nginx, ELK, Grafana, Prometheus</dd></div>
+      <div><dt class="label">AI tooling</dt><dd>Claude Code, MCP servers, Qdrant for code search</dd></div>
+      <div><dt class="label">Also</dt><dd>TypeScript and React, Flutter, Go, Ruby on Rails</dd></div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="education">
+    <h2 id="education">Education and languages</h2>
+    <div class="two">
+      <ul>
+        <li>Kazakh-German University (DKU), Almaty<span>BSc Information Systems, 2017 → 2021</span></li>
+        <li>Yandex Practicum<span>Middle Python Developer, 2021 → 2022</span></li>
+        <li>Yandex Practicum<span>Asynchronous Programming in Python, 2022 → 2023</span></li>
+      </ul>
+      <ul>
+        <li>Languages<span>Russian, Kazakh, English</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Bernar Berdikul · Almaty, Kazakhstan</span>
+    <span>Updated September 2026</span>
+  </footer>
+
+</main>
+<script>
+  document.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var text = button.getAttribute('data-copy');
+      var done = function (label) {
+        button.textContent = label;
+        setTimeout(function () { button.textContent = 'Copy'; }, 1600);
+      };
+      var selectTarget = function () {
+        var target = document.getElementById(button.getAttribute('aria-controls'));
+        var range = document.createRange();
+        range.selectNodeContents(target);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        done('Selected');
+      };
+      try {
+        navigator.clipboard.writeText(text).then(function () { done('Copied'); }, selectTarget);
+      } catch (e) {
+        selectTarget();
+      }
+    });
+  });
+</script>
+</body>
+</html>
