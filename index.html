@@ -346,6 +346,14 @@
     * { transition: none !important; animation: none !important; }
   }
 </style>
+<script>
+  // Microsoft Clarity: visit statistics, click and scroll heatmaps, session recordings.
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, 'clarity', 'script', 'yq07qoiemb');
+</script>
 <script type="importmap">{"imports":{
   "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
   "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
@@ -589,6 +597,7 @@
     <div class="footer-meta">
       <span class="label">On this page</span>
       <p>The star field up top is drawn with three.js: stars follow the contours of any SVG shape, so it can spell a word too.</p>
+      <p>Visits are measured with Microsoft Clarity.</p>
       <p><a href="#top">Back to top ↑</a></p>
     </div>
   </div>
@@ -608,6 +617,23 @@
   }
 </script>
 <script>
+  // Named Clarity events, so the dashboard can filter visits by what people actually did.
+  var track = function (name) { if (window.clarity) window.clarity('event', name); };
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href]');
+    if (link) {
+      var href = link.getAttribute('href');
+      var name = href.indexOf('mailto:') === 0 ? 'contact_email' : href.indexOf('t.me/') > -1 ? 'contact_telegram'
+        : href.indexOf('linkedin.com') > -1 ? 'open_linkedin' : href.indexOf('github.com') > -1 ? 'open_github' : null;
+      if (name) track(name);
+    }
+    var chip = e.target.closest('[data-shape]');
+    if (chip) track('shape_' + chip.getAttribute('data-shape'));
+    if (e.target.closest('[data-copy]')) track('copy_email');
+  });
+  document.querySelector('.shapes').addEventListener('submit', function () { track('shape_drawn'); });
+  document.querySelector('.stage').addEventListener('pointerdown', function () { track('shape_dragged'); }, { once: true });
+
   document.querySelectorAll('[data-copy]').forEach(function (button) {
     button.addEventListener('click', function () {
       var text = button.getAttribute('data-copy');
@@ -644,6 +670,7 @@
       sync();
     });
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+    button.addEventListener('click', function () { track(isDark() ? 'theme_dark' : 'theme_light'); });
     sync();
   })();
 
