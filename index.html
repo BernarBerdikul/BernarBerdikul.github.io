@@ -5,251 +5,422 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bernar Berdikul</title>
 <meta name="description" content="Bernar Berdikul, backend and data engineer in Almaty. Python, Airflow, dbt, Greenplum. Reconciling airline ticket data at Freedom Travel.">
+<meta name="theme-color" content="#050A18">
 <meta property="og:title" content="Bernar Berdikul">
 <meta property="og:description" content="Backend and data engineer in Almaty. Python, Airflow, dbt, Greenplum.">
 <meta property="og:image" content="https://bernarberdikul.github.io/avatar.jpg">
 <meta property="og:url" content="https://bernarberdikul.github.io/">
 <meta property="og:type" content="profile">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315212C'/%3E%3Ctext x='32' y='44' font-family='Arial Narrow,Arial,sans-serif' font-weight='700' font-size='34' text-anchor='middle' fill='%23F0A92E'%3EBB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050A18'/%3E%3Ctext x='32' y='44' font-family='Arial Narrow,Arial,sans-serif' font-weight='700' font-size='34' text-anchor='middle' fill='%23FFB547'%3EBB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+<script>
+  // Applied before paint so a saved theme never flashes the other one.
+  try { var saved = localStorage.getItem('theme'); if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved; } catch (e) {}
+</script>
 <style>
   :root {
-    --ground: #EEF1F4;
+    --ground: #F5F7FC;
     --surface: #FFFFFF;
-    --ink: #15212C;
-    --muted: #56636F;
-    --line: #D3DAE1;
-    --amber: #F0A92E;
-    --on-amber: #15212C;
-    --link: #0F5A9E;
-    --shadow: 0 1px 2px rgba(21, 33, 44, .06), 0 12px 32px rgba(21, 33, 44, .08);
+    --surface-2: #EDF1FA;
+    --ink: #0E1A2B;
+    --muted: #4B596B;
+    --line: #DCE3EE;
+    --link: #1760D6;
+    --amber: #F59E0B;
+    --sky: #2F80ED;
+    --violet: #7B5CFA;
+    --coral: #F4623A;
+    --mint: #0FA67B;
+    --on-amber: #111827;
+    --focus: #B45309;
+    --shadow: 0 1px 2px rgba(14, 26, 43, .05), 0 10px 30px rgba(14, 26, 43, .08);
+    --shadow-lift: 0 2px 4px rgba(14, 26, 43, .06), 0 18px 40px rgba(14, 26, 43, .12);
+    --hero-bg: #050A18;
+    --hero-ink: #F4F7FF;
+    --hero-muted: #BAC6DA;
     --display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
-    --body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    --topbar-h: 60px;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --ground: #0D141B;
-      --surface: #15202A;
-      --ink: #E4EAF0;
-      --muted: #93A3B2;
-      --line: #283541;
-      --amber: #F2B347;
-      --on-amber: #15212C;
-      --link: #86BEF2;
-      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+      --ground: #080D18;
+      --surface: #111A29;
+      --surface-2: #172236;
+      --ink: #E8EEF7;
+      --muted: #9AABBF;
+      --line: #22314A;
+      --link: #7DB4FF;
+      --amber: #FFB547;
+      --sky: #5BA2FF;
+      --violet: #A08BFF;
+      --coral: #FF8662;
+      --mint: #34D3A0;
+      --focus: #FFB547;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 30px rgba(0, 0, 0, .35);
+      --shadow-lift: 0 2px 4px rgba(0, 0, 0, .4), 0 18px 40px rgba(0, 0, 0, .45);
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --ground: #0D141B;
-    --surface: #15202A;
-    --ink: #E4EAF0;
-    --muted: #93A3B2;
-    --line: #283541;
-    --amber: #F2B347;
-    --on-amber: #15212C;
-    --link: #86BEF2;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
+    --ground: #080D18;
+    --surface: #111A29;
+    --surface-2: #172236;
+    --ink: #E8EEF7;
+    --muted: #9AABBF;
+    --line: #22314A;
+    --link: #7DB4FF;
+    --amber: #FFB547;
+    --sky: #5BA2FF;
+    --violet: #A08BFF;
+    --coral: #FF8662;
+    --mint: #34D3A0;
+    --focus: #FFB547;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 30px rgba(0, 0, 0, .35);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, .4), 0 18px 40px rgba(0, 0, 0, .45);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font-family: var(--body);
-    font-size: 17px;
-    line-height: 1.6;
-  }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--topbar-h) + 16px); }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65; }
   img { max-width: 100%; display: block; }
-  a { color: var(--link); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a { color: var(--link); text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
   a:hover { text-decoration-color: currentColor; }
-  :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+  /* Inside scrolling rows an outside ring gets clipped, so these draw it inward. */
+  .topnav a:focus-visible, .chips button:focus-visible { outline-offset: -3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  p { margin: 0; }
+  .skip { position: absolute; left: 12px; top: -48px; z-index: 100; padding: 8px 14px; border-radius: 8px; background: var(--amber); color: var(--on-amber); font-weight: 600; }
+  .skip:focus { top: 10px; }
+  .label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
-  .wrap { max-width: 880px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 64px; }
-
-  .label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--muted);
+  /* Header */
+  .topbar {
+    position: sticky; top: 0; z-index: 50; height: var(--topbar-h);
+    display: flex; align-items: center; gap: 18px;
+    padding-inline: max(20px, calc((100% - 1120px) / 2));
+    background: color-mix(in srgb, var(--surface) 84%, transparent);
+    -webkit-backdrop-filter: saturate(1.5) blur(14px); backdrop-filter: saturate(1.5) blur(14px);
+    border-bottom: 1px solid var(--line);
   }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; flex: none; }
+  .brand-mark {
+    display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
+    background: var(--hero-bg); color: #FFB547; font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .02em;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+  }
+  .brand-name { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: .03em; text-transform: uppercase; }
+  .topnav { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+  .topnav::-webkit-scrollbar { display: none; }
+  @media (max-width: 720px) { .topnav { padding-right: 28px; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); } }
+  .topnav a {
+    flex: none; padding: 6px 12px; border-radius: 999px; color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 500; white-space: nowrap;
+  }
+  .topnav a:hover { color: var(--ink); background: var(--surface-2); }
+  .topnav a[aria-current="true"] { color: var(--ink); background: color-mix(in srgb, var(--amber) 22%, transparent); }
+  .theme {
+    flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+  }
+  .theme:hover { border-color: var(--amber); }
+  .theme svg { width: 18px; height: 18px; }
+  .theme .moon { display: none; }
+  :root[data-theme="dark"] .theme .sun { display: none; }
+  :root[data-theme="dark"] .theme .moon { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme .sun { display: none; }
+    :root:not([data-theme="light"]) .theme .moon { display: block; }
+  }
+
+  /* Hero: a night sky that holds the star field */
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    min-height: min(calc(100svh - var(--topbar-h)), 880px);
+    display: grid; align-items: stretch;
+    background:
+      radial-gradient(1.5px 1.5px at 12% 22%, #fff9, transparent 60%),
+      radial-gradient(1px 1px at 32% 68%, #fff8, transparent 60%),
+      radial-gradient(1.5px 1.5px at 58% 14%, #fffa, transparent 60%),
+      radial-gradient(1px 1px at 76% 58%, #fff7, transparent 60%),
+      radial-gradient(1.5px 1.5px at 90% 30%, #fff9, transparent 60%),
+      radial-gradient(1px 1px at 44% 88%, #fff6, transparent 60%),
+      var(--hero-bg);
+    color: var(--hero-ink);
+  }
+  .sky { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .9s ease; }
+  .hero[data-starfield="ready"] .sky { opacity: 1; }
+  .nebula {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none; mix-blend-mode: screen;
+    background:
+      radial-gradient(38% 42% at 72% 42%, rgba(123, 92, 250, .30), transparent 70%),
+      radial-gradient(30% 34% at 90% 82%, rgba(47, 128, 237, .26), transparent 70%),
+      radial-gradient(34% 30% at 14% 92%, rgba(245, 158, 11, .20), transparent 70%),
+      radial-gradient(24% 26% at 30% 10%, rgba(244, 98, 58, .14), transparent 70%);
+  }
+  .hero-inner {
+    position: relative; z-index: 1; width: 100%; max-width: 1120px; margin: 0 auto;
+    padding: 56px 20px 88px; /* the boarding pass overlaps the hero's last 56px */
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px 40px; align-items: stretch;
+  }
+  .hero-copy { align-self: center; display: grid; gap: 22px; max-width: 34rem; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #FFC46B; }
+  .hero h1 {
+    margin: 0; font-family: var(--display); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(52px, 8vw, 96px); line-height: .9; letter-spacing: .005em; text-wrap: balance;
+  }
+  .hero-role {
+    font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3vw, 32px); line-height: 1.1; letter-spacing: .02em;
+    background: linear-gradient(90deg, #7CC8FF, #B69CFF 45%, #FFC46B); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lede { font-size: 18px; color: var(--hero-muted); max-width: 32rem; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 12px;
+    font-weight: 600; font-size: 15px; text-decoration: none; color: var(--hero-ink);
+    border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .06);
+  }
+  .btn:hover { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .4); }
+  .btn.primary { background: #FFB547; border-color: #FFB547; color: #111827; }
+  .btn.primary:hover { background: #FFC46B; }
+  .hero-play { display: grid; grid-template-rows: minmax(300px, 1fr) auto; gap: 12px; min-width: 0; }
+  .stage { display: block; width: 100%; padding: 0; border: 0; border-radius: 24px; background: transparent; cursor: grab; touch-action: pan-y; }
+  .stage[data-dragging="true"] { cursor: grabbing; }
+  .stage:focus-visible { outline: 2px dashed rgba(255, 255, 255, .55); outline-offset: -6px; }
+  .shapes { display: grid; gap: 8px; justify-items: center; }
+  .hint { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--hero-muted); }
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .chips button, .shape-field input, .shape-field textarea, .shape-field button {
+    font: 500 13px/1.3 var(--body); color: var(--hero-ink);
+    background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; padding: 7px 13px;
+  }
+  .chips button, .shape-field button { cursor: pointer; }
+  .chips button:hover, .shape-field button:hover { border-color: rgba(255, 255, 255, .45); }
+  .chips button[aria-pressed="true"] { background: #F4F7FF; border-color: #F4F7FF; color: #0B1220; }
+  .shape-field { display: flex; gap: 6px; width: min(100%, 460px); }
+  .shape-field[hidden] { display: none; }
+  .shape-field input, .shape-field textarea { flex: 1; min-width: 0; }
+  .shape-field textarea { border-radius: 12px; resize: vertical; font: 12px/1.4 var(--mono); }
+  .shapes .note { font-size: 13px; color: #FFC46B; text-align: center; }
+  .shapes .note:empty { display: none; }
+  .hero.static .shapes, .hero.static .stage { display: none; }
+  .hero.static .hero-play { display: none; }
+  .hero.static .hero-inner { grid-template-columns: minmax(0, 1fr); }
+
+  /* Page */
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; display: grid; gap: 72px; }
+  section { display: grid; gap: 24px; }
+  h2 {
+    margin: 0; display: flex; align-items: center; gap: 14px;
+    font-family: var(--display); font-weight: 600; font-size: 34px; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase;
+  }
+  h2::before { content: ''; width: 36px; height: 6px; border-radius: 3px; background: var(--accent, var(--amber)); flex: none; }
+  h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 25px; line-height: 1.15; letter-spacing: .01em; }
+  .prose { display: grid; gap: 14px; max-width: 68ch; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
 
   /* Boarding pass */
   .pass {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
-    background: var(--surface);
-    border-radius: 18px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    position: relative; z-index: 2; margin-top: -56px;
+    display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 0;
+    background: var(--surface); border-radius: 20px; box-shadow: var(--shadow-lift); overflow: hidden;
   }
   .band {
-    grid-column: 1;
-    display: flex;
-    justify-content: space-between;
-    gap: 4px 16px;
-    flex-wrap: wrap;
-    padding: 10px 28px;
-    background: var(--amber);
-    color: var(--on-amber);
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
+    grid-column: 1; display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap; padding: 11px 28px;
+    background: linear-gradient(90deg, #FFB547, #FF8A5B 55%, #B69CFF);
+    color: #111827; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
   }
   .pass-main { padding: 28px; display: grid; gap: 22px; align-content: start; }
   .who { display: flex; gap: 20px; align-items: center; }
-  .who img { width: 92px; height: 92px; border-radius: 14px; object-fit: cover; flex: none; }
-  .who .label { display: block; margin-bottom: 2px; }
-  h1 {
-    margin: 0;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(42px, 7.4vw, 68px);
-    line-height: .95;
-    letter-spacing: .005em;
-    text-transform: uppercase;
-    text-wrap: balance;
-  }
-  .lede { margin: 0; max-width: 60ch; font-size: 18px; }
-  .fields {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 20px;
-    margin: 0;
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
-  }
+  .who img { width: 88px; height: 88px; border-radius: 16px; object-fit: cover; flex: none; box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px color-mix(in srgb, var(--amber) 70%, transparent); }
+  .who .label { display: block; margin-bottom: 4px; }
+  .pass-name { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4.4vw, 44px); line-height: 1; text-transform: uppercase; }
+  .fields { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 20px; margin: 0; padding-top: 18px; border-top: 1px solid var(--line); }
   .fields div { display: grid; gap: 2px; }
   .fields dt { margin: 0; }
   .fields dd { margin: 0; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.15; }
-
-  .pass-stub {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    position: relative;
-    padding: 28px 24px;
-    border-left: 2px dashed var(--line);
-    display: grid;
-    gap: 16px;
-    align-content: start;
-  }
-  .pass-stub::before, .pass-stub::after {
-    content: '';
-    position: absolute;
-    left: -13px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--ground);
-  }
-  .pass-stub::before { top: -12px; }
+  .pass-stub { grid-column: 2; grid-row: 1 / span 2; position: relative; padding: 28px 24px; border-left: 2px dashed var(--line); display: grid; gap: 14px; align-content: start; background: var(--surface-2); }
+  .pass-stub::before, .pass-stub::after { content: ''; position: absolute; left: -13px; width: 24px; height: 24px; border-radius: 50%; background: var(--ground); }
+  .pass-stub::before { top: -12px; background: var(--hero-bg); } /* this edge sits over the hero */
   .pass-stub::after { bottom: -12px; }
   .contact { display: grid; gap: 2px; }
-  .contact a, .contact span.value { font-family: var(--mono); font-size: 14px; overflow-wrap: anywhere; }
+  .contact a { font-family: var(--mono); font-size: 14px; overflow-wrap: anywhere; }
   .email-row { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-  .copy {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: transparent;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 2px 8px;
-    cursor: pointer;
-  }
+  .copy { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; cursor: pointer; }
   .copy:hover { border-color: var(--amber); }
 
   /* Sections */
-  section { display: grid; gap: 22px; }
-  h2 {
-    margin: 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--ink);
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 1.1;
-    letter-spacing: .02em;
-    text-transform: uppercase;
-  }
-  h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.15; letter-spacing: .01em; }
-  p { margin: 0; }
-  .prose { display: grid; gap: 14px; max-width: 66ch; }
+  #about-s { --accent: var(--sky); }
+  #now-s { --accent: var(--amber); }
+  #experience-s { --accent: var(--violet); }
+  #skills-s { --accent: var(--mint); }
+  #education-s { --accent: var(--sky); }
 
-  .now { display: grid; gap: 14px; padding-left: 20px; border-left: 4px solid var(--amber); }
-  .now .meta { color: var(--muted); font-style: italic; }
-  .now ul { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; max-width: 68ch; }
+  .now { padding: 28px; display: grid; gap: 16px; border-left: 6px solid var(--amber); }
+  .now .meta { color: var(--muted); }
+  .now ul:not(.pills) { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; max-width: 76ch; }
   .now li::marker { color: var(--amber); }
-  .stack { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .pills li {
+    font-family: var(--mono); font-size: 12.5px; padding: 4px 10px; border-radius: 999px;
+    background: color-mix(in srgb, var(--accent, var(--amber)) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent, var(--amber)) 35%, transparent);
+  }
 
-  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
-  .timeline li { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 6px 24px; }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; position: relative; }
+  .timeline li {
+    display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 6px 24px; padding: 20px 22px 20px 28px; position: relative;
+  }
+  .timeline li::before { content: ''; position: absolute; left: 0; top: 18px; bottom: 18px; width: 4px; border-radius: 2px; background: var(--dot); }
+  .timeline li:nth-child(5n+1) { --dot: var(--violet); }
+  .timeline li:nth-child(5n+2) { --dot: var(--sky); }
+  .timeline li:nth-child(5n+3) { --dot: var(--coral); }
+  .timeline li:nth-child(5n+4) { --dot: var(--mint); }
+  .timeline li:nth-child(5n+5) { --dot: var(--amber); }
   .dates { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 5px; white-space: nowrap; }
-  .role { color: var(--muted); font-style: italic; }
-  .timeline p { max-width: 64ch; }
+  .role { color: var(--muted); font-style: italic; margin-bottom: 6px; }
+  .timeline p { max-width: 70ch; }
 
-  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
-  .project { display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 1px solid var(--line); }
-  .tags { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-
-  .skills { margin: 0; display: grid; gap: 12px; }
-  .skills div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 4px 24px; }
-  .skills dt { padding-top: 4px; }
+  .skills { margin: 0; padding: 24px; display: grid; gap: 16px; }
+  .skills div { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 6px 24px; align-items: start; }
+  .skills dt { padding-top: 6px; }
   .skills dd { margin: 0; }
 
-  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
-  .two ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-  .two li span { display: block; color: var(--muted); font-size: 15px; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .two ul { margin: 0; padding: 24px; list-style: none; display: grid; gap: 14px; align-content: start; }
+  .two li { font-weight: 500; }
+  .two li span { display: block; color: var(--muted); font-size: 15px; font-weight: 400; }
 
-  footer { font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line); }
+  /* Footer */
+  .site-footer { background: var(--hero-bg); color: var(--hero-muted); position: relative; overflow: hidden; }
+  .site-footer::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, #7CC8FF, #B69CFF, #FFB547, #FF8A5B); }
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: 48px 20px 28px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+  .footer-inner h2 { color: var(--hero-ink); font-size: 26px; }
+  .footer-inner h2::before { background: #FFB547; }
+  .site-footer .label { color: var(--hero-muted); }
+  .site-footer a { color: var(--hero-ink); text-decoration-color: rgba(255, 181, 71, .6); }
+  .site-footer a:hover { text-decoration-color: #FFB547; }
+  .footer-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-family: var(--mono); font-size: 14px; }
+  .footer-links span { display: block; }
+  .footer-meta { display: grid; gap: 10px; align-content: start; font-size: 14px; }
+  .footer-bottom { max-width: 1120px; margin: 0 auto; padding: 16px 20px 28px; border-top: 1px solid rgba(255, 255, 255, .1); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; }
 
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: minmax(0, 1fr); padding-top: 40px; padding-bottom: 72px; }
+    .hero-copy { max-width: none; }
+    .hero-play { grid-template-rows: minmax(340px, 52svh) auto; }
+    .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .footer-inner > :first-child { grid-column: 1 / -1; }
+  }
   @media (max-width: 720px) {
-    .pass { grid-template-columns: minmax(0, 1fr); }
+    .brand-name { display: none; }
+    .pass { grid-template-columns: minmax(0, 1fr); margin-top: -40px; }
     .pass-stub { grid-column: 1; grid-row: auto; border-left: 0; border-top: 2px dashed var(--line); }
-    .pass-stub::before, .pass-stub::after { top: -13px; bottom: auto; }
+    .pass-stub::before, .pass-stub::after { top: -13px; bottom: auto; background: var(--ground); }
     .pass-stub::before { left: -12px; }
     .pass-stub::after { left: auto; right: -12px; }
     .timeline li, .skills div { grid-template-columns: minmax(0, 1fr); }
     .dates { padding-top: 0; }
-    .projects, .two { grid-template-columns: minmax(0, 1fr); }
+    .two { grid-template-columns: minmax(0, 1fr); }
+    .wrap { gap: 56px; }
+    h2 { font-size: 30px; }
+    .chips { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; max-width: 100%; scrollbar-width: none; padding-bottom: 2px; }
+    .chips button { flex: none; }
   }
-  @media (max-width: 440px) {
-    .pass-main, .pass-stub { padding: 22px 18px; }
+  @media (max-width: 480px) {
+    .topbar { gap: 10px; }
+    .pass-main, .pass-stub, .now, .skills, .two ul { padding: 20px 18px; }
+    .timeline li { padding: 18px 16px 18px 22px; }
     .band { padding: 10px 18px; }
     .who { flex-direction: column; align-items: flex-start; gap: 14px; }
-    .who img { width: 76px; height: 76px; }
+    .fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .footer-inner { grid-template-columns: minmax(0, 1fr); }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
 </style>
+<script type="importmap">{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+  "opentype.js":"https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.module.js"}}</script>
 </head>
 <body>
-<main class="wrap">
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="pass" aria-label="Profile">
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="Bernar Berdikul, back to top"><span class="brand-mark" aria-hidden="true">BB</span><span class="brand-name">Bernar Berdikul</span></a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#now">Now</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="theme" type="button" aria-label="Toggle dark theme" aria-pressed="false">
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+
+<section class="hero" id="top" aria-label="Introduction">
+  <canvas class="sky" aria-hidden="true"></canvas>
+  <div class="nebula" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Backend and data engineering · ALA · Almaty</p>
+      <h1>Bernar Berdikul</h1>
+      <p class="hero-role">Data Engineer at Freedom Travel</p>
+      <p class="lede">Software engineer from Almaty. Six years of Python backends; today I keep the money data of a travel company honest, matching every ticket we sell against what the airline says it sold.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:bernar.berdikul@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/bernar-berdikul/" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/BernarBerdikul" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="hero-play">
+      <button class="stage" type="button" data-dragging="false" aria-label="Star shape. Drag or use the arrow keys to turn it, Escape to face it forward again."></button>
+      <form class="shapes" autocomplete="off">
+        <p class="hint" aria-hidden="true">Drag to spin · pick a shape</p>
+        <div class="chips" role="group" aria-label="Star shape">
+          <button type="button" data-shape="galaxy" aria-pressed="true">Galaxy</button>
+          <button type="button" data-shape="plane" aria-pressed="false">Plane</button>
+          <button type="button" data-shape="heart" aria-pressed="false">Heart</button>
+          <button type="button" data-shape="infinity" aria-pressed="false">Infinity</button>
+          <button type="button" data-shape="atom" aria-pressed="false">Atom</button>
+          <button type="button" data-shape="text" aria-pressed="false">Your text</button>
+          <button type="button" data-shape="svg" aria-pressed="false">SVG</button>
+        </div>
+        <div class="shape-field" data-for="text" hidden>
+          <input name="text" value="Bernar" maxlength="24" aria-label="Text to draw in stars"><button type="submit">Draw</button>
+        </div>
+        <div class="shape-field" data-for="svg" hidden>
+          <textarea name="svg" rows="3" placeholder="Paste a path's d attribute or a whole &lt;svg&gt;" aria-label="SVG markup to draw in stars"></textarea><button type="submit">Draw</button>
+        </div>
+        <p class="note" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="wrap">
+
+  <section class="pass" aria-label="At a glance">
     <div class="band" aria-hidden="true"><span>Backend and data engineering</span><span>ALA · Almaty</span></div>
     <div class="pass-main">
       <div class="who">
-        <img src="avatar.jpg" alt="Bernar Berdikul" width="92" height="92">
+        <img src="avatar.jpg" alt="Bernar Berdikul" width="88" height="88">
         <div>
           <span class="label">Passenger · Berdikul/Bernar Mr</span>
-          <h1>Bernar Berdikul</h1>
+          <p class="pass-name">Bernar Berdikul</p>
         </div>
       </div>
-      <p class="lede">Software engineer from Almaty. Six years of Python backends; today I keep the money data of a travel company honest, matching every ticket we sell against what the airline says it sold.</p>
       <dl class="fields">
         <div><dt class="label">Role</dt><dd>Data Engineer</dd></div>
         <div><dt class="label">Now at</dt><dd>Freedom Travel</dd></div>
@@ -263,7 +434,8 @@
         <span class="label">Email</span>
         <div class="email-row">
           <a id="email" href="mailto:bernar.berdikul@gmail.com">bernar.berdikul@gmail.com</a>
-          <button class="copy" type="button" id="copy-email" data-copy="bernar.berdikul@gmail.com" aria-controls="email">Copy</button>
+          <button class="copy" type="button" data-copy="bernar.berdikul@gmail.com" aria-controls="email">Copy</button>
+          <span class="sr-only" role="status" id="copy-status"></span>
         </div>
       </div>
       <div class="contact">
@@ -279,9 +451,9 @@
         <a href="https://github.com/BernarBerdikul" rel="noopener">BernarBerdikul</a>
       </div>
     </div>
-  </header>
+  </section>
 
-  <section aria-labelledby="about">
+  <section id="about-s" aria-labelledby="about">
     <h2 id="about">About</h2>
     <div class="prose">
       <p>I started on product backends: a QR menu and payments platform for restaurants, a learning platform with team quizzes, a loading optimizer for a steel plant, an HR product with AI resume matching. Django, FastAPI, Kafka, Celery, Docker, and whatever else the job needed.</p>
@@ -290,9 +462,9 @@
     </div>
   </section>
 
-  <section aria-labelledby="now">
+  <section id="now-s" aria-labelledby="now">
     <h2 id="now">Now: Freedom Travel</h2>
-    <div class="now">
+    <div class="now card">
       <div>
         <h3>Data Engineer</h3>
         <p class="meta">Apr 2026 → now · Almaty · online travel agency: flights, rail, hotels and tours</p>
@@ -304,14 +476,16 @@
         <li>Guard rails: reconciliation invariants, freshness alerts for source tables, empty report alerts and a daily provider error rate digest.</li>
         <li>Platform housekeeping: report delivery moved from Google Drive to OneDrive, mail ingest to Microsoft 365, about 100 dead DAG files removed, DAGs ready for Airflow 2.11, an isolated dev stage.</li>
       </ul>
-      <p class="stack">Python · SQL · Airflow · dbt · Greenplum · PostgreSQL · RabbitMQ · Kubernetes · GitLab&nbsp;CI · ELK · Claude&nbsp;Code</p>
+      <ul class="pills" aria-label="Stack">
+        <li>Python</li><li>SQL</li><li>Airflow</li><li>dbt</li><li>Greenplum</li><li>PostgreSQL</li><li>RabbitMQ</li><li>Kubernetes</li><li>GitLab CI</li><li>ELK</li><li>Claude Code</li>
+      </ul>
     </div>
   </section>
 
-  <section aria-labelledby="experience">
+  <section id="experience-s" aria-labelledby="experience">
     <h2 id="experience">Before that</h2>
     <ol class="timeline">
-      <li>
+      <li class="card">
         <span class="dates">Sep 2024 → Apr 2026</span>
         <div>
           <h3>MyStartups</h3>
@@ -319,7 +493,7 @@
           <p>SaaS HR platform: candidate base with AI resume and vacancy matching (5K+ resumes a month), employee records, leave tracking, clock-in schedules. An LMS with proctored assessments and a document approval system.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Aug → Oct 2024</span>
         <div>
           <h3>Akhter Studios</h3>
@@ -327,7 +501,7 @@
           <p>CRM for a microfinance organization: a form builder with 15+ field types, loan application workflows, payment gateways and automated reporting.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Dec 2023 → Aug 2024</span>
         <div>
           <h3>BTS, Eurasian Resources Group</h3>
@@ -335,7 +509,7 @@
           <p>Led five developers building a corporate portal: video streaming for 500+ concurrent viewers, document approvals, an internal social network.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Mar 2022 → Dec 2023</span>
         <div>
           <h3>YLab Development</h3>
@@ -343,7 +517,7 @@
           <p>Wagon loading optimizer for one of Russia's largest steel plants: calculation time cut from 30 to 10 minutes. Flask and FastAPI services over Redis and Celery, SSE updates, a Kafka consumer for PostgreSQL sync; test coverage raised from 10% to 40%.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Jan → Mar 2022</span>
         <div>
           <h3>EPAM Systems</h3>
@@ -351,7 +525,7 @@
           <p>Python training program for beginner developers.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Oct 2020 → Dec 2021</span>
         <div>
           <h3>Appetite Inc.</h3>
@@ -359,7 +533,7 @@
           <p>Cheflist, a QR menu and ordering platform built from scratch: REST API, WebSockets, CloudPayments, Firebase push, FFmpeg media processing. 60+ venues in four months, 12K+ users.</p>
         </div>
       </li>
-      <li>
+      <li class="card">
         <span class="dates">Jan → Oct 2020</span>
         <div>
           <h3>Codebusters</h3>
@@ -370,73 +544,77 @@
     </ol>
   </section>
 
-  <section aria-labelledby="projects">
-    <h2 id="projects">Projects</h2>
-    <div class="projects">
-      <article class="project">
-        <h3>MixIt</h3>
-        <span class="tags">Flutter · BLoC · Clean Architecture · Hive</span>
-        <p>Cocktail recipe app on TheCocktailDB: search with debounce, category filters, favorites and an offline cache.</p>
-        <a href="https://github.com/BernarBerdikul/cocktail-mobile-app" rel="noopener">Code on GitHub</a>
-      </article>
-      <article class="project">
-        <h3>Random Coffee</h3>
-        <span class="tags">React · TypeScript · Python</span>
-        <p>Picks colleagues, validates the list and shuffles them into random coffee meetings, keeping a history of past rounds.</p>
-        <a href="https://github.com/BernarBerdikul/random-coffee-front" rel="noopener">Code on GitHub</a>
-      </article>
-      <article class="project">
-        <h3>Billing service</h3>
-        <span class="tags">Django · Celery · Kafka · YooKassa · team project</span>
-        <p>Subscription payments and refunds with exactly-once processing and a Django admin for payment control. Graduation project of the Yandex Practicum Middle Python track.</p>
-        <a href="https://github.com/BernarBerdikul/graduate_work" rel="noopener">Code on GitHub</a>
-      </article>
-      <article class="project">
-        <h3>Online cinema services</h3>
-        <span class="tags">FastAPI · Elasticsearch · Kafka · ClickHouse</span>
-        <p>A set of services built sprint by sprint: ETL from PostgreSQL to Elasticsearch, an async catalog API, auth, user generated content through Kafka into ClickHouse.</p>
-        <a href="https://github.com/BernarBerdikul?tab=repositories" rel="noopener">Repositories on GitHub</a>
-      </article>
-    </div>
-  </section>
-
-  <section aria-labelledby="skills">
+  <section id="skills-s" aria-labelledby="skills">
     <h2 id="skills">Skills</h2>
-    <dl class="skills">
-      <div><dt class="label">Data</dt><dd>Airflow, dbt, Greenplum, PostgreSQL, ClickHouse, Elasticsearch, Redis, Kafka, RabbitMQ</dd></div>
-      <div><dt class="label">Backend</dt><dd>Python, Django, DRF, FastAPI, Flask, aiohttp, Sanic, Celery, WebSockets, SSE</dd></div>
-      <div><dt class="label">Infrastructure</dt><dd>Docker, Kubernetes, GitLab CI, GitHub Actions, Ansible, Nginx, ELK, Grafana, Prometheus</dd></div>
-      <div><dt class="label">AI tooling</dt><dd>Claude Code, MCP servers, Qdrant for code search</dd></div>
-      <div><dt class="label">Also</dt><dd>TypeScript and React, Flutter, Go, Ruby on Rails</dd></div>
+    <dl class="skills card">
+      <div><dt class="label">Data</dt><dd><ul class="pills"><li>Airflow</li><li>dbt</li><li>Greenplum</li><li>PostgreSQL</li><li>ClickHouse</li><li>Elasticsearch</li><li>Redis</li><li>Kafka</li><li>RabbitMQ</li></ul></dd></div>
+      <div><dt class="label">Backend</dt><dd><ul class="pills"><li>Python</li><li>Django</li><li>DRF</li><li>FastAPI</li><li>Flask</li><li>aiohttp</li><li>Sanic</li><li>Celery</li><li>WebSockets</li><li>SSE</li></ul></dd></div>
+      <div><dt class="label">Infrastructure</dt><dd><ul class="pills"><li>Docker</li><li>Kubernetes</li><li>GitLab CI</li><li>GitHub Actions</li><li>Ansible</li><li>Nginx</li><li>ELK</li><li>Grafana</li><li>Prometheus</li></ul></dd></div>
+      <div><dt class="label">AI tooling</dt><dd><ul class="pills"><li>Claude Code</li><li>MCP servers</li><li>Qdrant for code search</li></ul></dd></div>
+      <div><dt class="label">Also</dt><dd><ul class="pills"><li>TypeScript and React</li><li>Flutter</li><li>Go</li><li>Ruby on Rails</li></ul></dd></div>
     </dl>
   </section>
 
-  <section aria-labelledby="education">
+  <section id="education-s" aria-labelledby="education">
     <h2 id="education">Education and languages</h2>
     <div class="two">
-      <ul>
+      <ul class="card">
         <li>Kazakh-German University (DKU), Almaty<span>BSc Information Systems, 2017 → 2021</span></li>
         <li>Yandex Practicum<span>Middle Python Developer, 2021 → 2022</span></li>
         <li>Yandex Practicum<span>Asynchronous Programming in Python, 2022 → 2023</span></li>
       </ul>
-      <ul>
+      <ul class="card">
         <li>Languages<span>Russian, Kazakh, English</span></li>
       </ul>
     </div>
   </section>
 
-  <footer>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-meta">
+      <h2>Let's talk</h2>
+      <p>Backend and data engineering from Almaty. Email or Telegram is the quickest way to reach me.</p>
+    </div>
+    <div>
+      <span class="label">Contact</span>
+      <ul class="footer-links">
+        <li><a href="mailto:bernar.berdikul@gmail.com">bernar.berdikul@gmail.com</a></li>
+        <li><a href="https://t.me/bernar_berdicool" rel="noopener">Telegram @bernar_berdicool</a></li>
+        <li><a href="https://www.linkedin.com/in/bernar-berdikul/" rel="noopener">LinkedIn in/bernar-berdikul</a></li>
+        <li><a href="https://github.com/BernarBerdikul" rel="noopener">GitHub BernarBerdikul</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span class="label">On this page</span>
+      <p>The star field up top is drawn with three.js: stars follow the contours of any SVG shape, so it can spell a word too.</p>
+      <p><a href="#top">Back to top ↑</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
     <span>Bernar Berdikul · Almaty, Kazakhstan</span>
     <span>Updated September 2026</span>
-  </footer>
+  </div>
+</footer>
 
-</main>
+<script type="module">
+  const hero = document.querySelector('.hero');
+  const webgl2 = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (e) { return false; } })();
+  if (webgl2) {
+    import('./starfield.js').then((m) => m.mountStarfield(hero)).catch(() => hero.classList.add('static'));
+  } else {
+    hero.classList.add('static');
+  }
+</script>
 <script>
   document.querySelectorAll('[data-copy]').forEach(function (button) {
     button.addEventListener('click', function () {
       var text = button.getAttribute('data-copy');
+      var status = document.getElementById('copy-status');
       var done = function (label) {
         button.textContent = label;
+        status.textContent = label === 'Copied' ? 'Email address copied' : 'Email address selected';
         setTimeout(function () { button.textContent = 'Copy'; }, 1600);
       };
       var selectTarget = function () {
@@ -455,6 +633,40 @@
       }
     });
   });
+
+  (function () {
+    var root = document.documentElement, button = document.querySelector('.theme');
+    var isDark = function () { return root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
+    var sync = function () { button.setAttribute('aria-pressed', String(isDark())); };
+    button.addEventListener('click', function () {
+      root.dataset.theme = isDark() ? 'light' : 'dark';
+      try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+      sync();
+    });
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+    sync();
+  })();
+
+  (function () {
+    var nav = document.querySelector('.topnav'), links = Array.prototype.slice.call(nav.querySelectorAll('a')), queued = false, shown = null;
+    var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+    var refresh = function () {
+      queued = false;
+      var current = null;
+      targets.forEach(function (el, i) { if (el && el.getBoundingClientRect().top <= innerHeight * 0.4) current = links[i]; });
+      // The footer is too short to climb that far, so the very bottom of the page counts as Contact.
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) current = links[links.length - 1];
+      if (current === shown) return;
+      shown = current;
+      links.forEach(function (a) { if (a === current) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+      // On phones the nav scrolls sideways; keep the highlighted link in view without moving the page.
+      if (current && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: current.offsetLeft - (nav.clientWidth - current.offsetWidth) / 2 });
+    };
+    var queue = function () { if (!queued) { queued = true; requestAnimationFrame(refresh); } };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+    refresh();
+  })();
 </script>
 </body>
 </html>
